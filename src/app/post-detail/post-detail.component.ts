@@ -11,7 +11,10 @@ import { PostService } from '../post.service';
   styleUrls: ['./post-detail.component.css']
 })
 export class PostDetailComponent implements OnInit {
-  post: Post;
+  post: Post = {
+    id: 0,
+    name: "",
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -24,11 +27,11 @@ export class PostDetailComponent implements OnInit {
   }
 
   getPost(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id')!;
     this.postService.getPost(id)
       .subscribe(post => this.post = post);
   }
-  
+
   goBack(): void {
     this.location.back();
   }
